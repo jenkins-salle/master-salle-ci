@@ -21,16 +21,16 @@ pipeline {
             		junit 'target/surefire-reports/*.xml'
              }
           } 
-          stage('Package') {
-              steps {
-                sh script: './mvnw package -DskipTests'
-              }
-          }
           stage("Static code check by PMD") {
              steps {
                     echo 'Static code analysis'
                     sh script: './mvnw pmd:check'      
              }
+          }
+          stage('Package') {
+              steps {
+                sh script: './mvnw package -DskipTests'
+              }
           }
 
    }
