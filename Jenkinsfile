@@ -14,13 +14,13 @@ pipeline {
                     sh script: './mvnw compile'      
              }
           }
-          stage("Test") {
+          stage("Tests") {
           	 steps {
 	          		echo 'Do Junit test cases'
 	          		sh script: './mvnw test'
             		junit 'target/surefire-reports/*.xml'
              }
-          } 
+          }
           stage("Static code check by PMD") {
              steps {
                     echo 'Static code analysis'
@@ -32,6 +32,16 @@ pipeline {
                 sh script: './mvnw package -DskipTests'
               }
           }
-
+          stage("Integration tests") {
+          	 steps {
+	          		echo 'Do integration tests'
+	          		sh script: './mvnw verify'
+             }
+          }
+          stage("Deploy") {
+             steps {
+                    echo 'Deploy to artifactory'
+             }
+          }
    }
 }
