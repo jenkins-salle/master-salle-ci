@@ -1,0 +1,9 @@
+FROM openjdk:8
+
+COPY . /app
+
+RUN useradd -G sudo -ms /bin/bash dev \
+    && chown -R dev /app \
+    && chmod -R 774 /app
+
+USER dev
