@@ -2,45 +2,42 @@ pipeline {
    agent any
 
        stages {
-       	  stage("Checkout from SCM") {
-	       	  steps {
-	       	  		echo "Getting the latest sources from remote repository"
-	       	  		git 'https://github.com/jenkins-salle/master-salle-ci.git'
-	       	  }
-       	  }
           stage("Compile") {
              steps {
-                    echo 'Compiling sources'
-                    sh script: './mvnw compile'      
+                    echo 'Getting the latest sources from remote repository & compile those sources'
+                    git 'https://github.com/jenkins-salle/master-salle-ci.git'
+                    sh script: './mvnw compile'
              }
           }
           stage("Tests") {
           	 steps {
-	          		echo 'Do Junit test cases'
-	          		sh script: './mvnw test'
-            		junit 'target/surefire-reports/*.xml'
+	          		    echo 'Test cases execution'
+	          		    sh script: './mvnw test'
+            		    junit 'target/surefire-reports/*.xml'
              }
           }
-          stage("Static code check by PMD") {
+          stage("Static code analysis") {
              steps {
-                    echo 'Static code analysis'
-                    sh script: './mvnw pmd:check'      
+                    echo 'Performing static code analysis by PMD'
+                    sh script: './mvnw pmd:check'
              }
           }
           stage('Package') {
               steps {
-                sh script: './mvnw package -DskipTests'
+                     echo 'Packaging in process'
+                     sh script: './mvnw package -DskipTests'
               }
           }
           stage("Integration tests") {
           	 steps {
-	          		echo 'Do integration tests'
-	          		sh script: './mvnw verify'
+	          		    echo 'Execute integration test cases'
+	          		    sh script: './mvnw verify'
              }
           }
           stage("Deploy") {
              steps {
-                    echo 'Deploy to artifactory'
+                    echo 'Deploy the app'
+                    sh script: './java -jar ./target/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar'
              }
           }
    }
