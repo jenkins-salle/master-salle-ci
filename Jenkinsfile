@@ -10,10 +10,10 @@ pipeline {
              }
           }
           stage("Tests") {
-          	 steps {
-	          		    echo 'Test cases execution'
-	          		    sh script: './mvnw test'
-            		    junit 'target/surefire-reports/*.xml'
+             steps {
+	            echo 'Test cases execution'
+	            sh script: './mvnw test'
+            	    junit 'target/surefire-reports/*.xml'
              }
           }
           stage("Static code analysis") {
@@ -29,9 +29,9 @@ pipeline {
               }
           }
           stage("Integration tests") {
-          	 steps {
-	          		    echo 'Execute integration test cases'
-	          		    sh script: './mvnw verify'
+             steps {
+	     	    echo 'Execute integration test cases'
+	            sh script: './mvnw verify'
              }
           }
           stage("Deploy") {
