@@ -37,7 +37,7 @@ pipeline {
           stage("Deploy") {
              steps {
                     echo 'Deploy the app'
-                    sh script: 'java -jar ./target/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar'
+                    sh script: 'java -jar ./target/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar &'
              }
           }
    }
