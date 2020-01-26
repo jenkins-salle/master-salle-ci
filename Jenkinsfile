@@ -37,9 +37,18 @@ pipeline {
           stage("Deploy") {
              steps {
                     echo 'Deploy the app'
-                    sleep(time:3,unit:"SECONDS") 
+                    sleep(time:3,unit:"SECONDS")
                     sh script: 'java -jar ./target/code-with-quarkus-1.0.0-SNAPSHOT-runner.jar &'
              }
+          }
+      }
+
+      post {
+          success {
+            mail to: 'ricardo.muhamed@gmail.com', subject: 'Build success :D', body: 'success'
+          }
+          failure {
+            mail to: 'ricardo.muhamed@gmail.com', subject: 'The Pipeline failed :(', body: 'failed'
           }
    }
 }
