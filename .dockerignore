@@ -2,5 +2,6 @@
 !target/
 !mvnw
 !pom.xml
+!settings.xml
 !src/
 !.mvn/
