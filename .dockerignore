@@ -2,3 +2,7 @@
 !target/*-runner
 !target/*-runner.jar
 !target/lib/*
+!mvnw
+!pom.xml
+!src/
+!.mvn/
