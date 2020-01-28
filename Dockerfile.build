@@ -10,8 +10,6 @@ USER dev
 
 WORKDIR /app/
 
-RUN ./mvnw package -DskipTests
-
 #RUN ./mvnw compile
 #RUN ./mvnw test -DskipTests
-
+RUN ./mvnw package -DskipTests
