@@ -10,22 +10,17 @@ pipeline {
           }
           stage("Clean") {
              steps {
-                 sh "docker-compose down"
-                 sh "docker ps -qa | xargs docker rm -f || true"
+                 sh "clean.sh"
              }
           }
           stage("Build") {
              steps {
-                 sh "docker-compose build quarkus-build"
-                 sh "docker-compose run quarkus-build ./mvnw package -DskipTests"
-                 sh "docker-compose build quarkus-app"
-                 sh "docker-compose up -d quarkus-app"
-                 sh "docker-compose run quarkus-build ./mvnw test"
+                 sh "build.sh"
              }
           }
           stage("Test") {
              steps {
-                echo "no prueba"
+                sh "test.sh"
              }
           }
       }
