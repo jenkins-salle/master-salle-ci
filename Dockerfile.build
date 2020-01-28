@@ -7,9 +7,3 @@ RUN useradd -G sudo -ms /bin/bash dev \
     && chmod -R 774 /app
 
 USER dev
-
-WORKDIR /app/
-
-#RUN ./mvnw compile
-#RUN ./mvnw test -DskipTests
-RUN ./mvnw package -DskipTests
