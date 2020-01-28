@@ -3,20 +3,34 @@ version: "3.7"
 services:
 
   quarkus-build:
-    image: mdas/quarkus-build:1.0
     build:
+      context: .
       dockerfile: Dockerfile.build
+    image: "mdas/quarkus-build:${BUILD_VERSION}"
     container_name: quarkus-build
     networks:
       - quarkus-network
     volumes:
     - ./:/app
     working_dir: /app
+    env_file:
+      - .env
 
   quarkus-app:
-    image: mdas/quarkus-app:1.0
     build:
+      context: .
       dockerfile: src/main/docker/Dockerfile.jvm
+    image: "mdas/quarkus-app:${APP_VERSION}"
     container_name: quarkus-app
+    networks:
+      - quarkus-network
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
 
+#Docker Networks
+networks:
+  quarkus-network:
+    driver: bridge
 
