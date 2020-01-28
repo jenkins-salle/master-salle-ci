@@ -14,13 +14,4 @@ pipeline {
              }
           }
       }
-
-      post {
-          success {
-            mail to: 'ricardo.muhamed@gmail.com', subject: 'Build success :D', body: 'success'
-          }
-          failure {
-            mail to: 'ricardo.muhamed@gmail.com', subject: 'The Pipeline failed :(', body: 'failed'
-          }
-   }
 }
