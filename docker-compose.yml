@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+
+  quarkus-build:
+    image: mdas/quarkus-build:1.0
+    build:
+      dockerfile: Dockerfile.build
+    container_name: quarkus-build
+    networks:
+      - quarkus-network
+    volumes:
+    - ./:/app
+    working_dir: /app
+
+  quarkus-app:
+    image: mdas/quarkus-app:1.0
+    build:
+      dockerfile: src/main/docker/Dockerfile.jvm
+    container_name: quarkus-app
+
+
