@@ -22,6 +22,7 @@ pipeline {
           }
           stage("Test") {
              steps {
+                 sh "docker-compose run quarkus-build ./mvnw package -DskipTests"
                  sh "docker-compose up -d quarkus-app"
                  sh "docker-compose run quarkus-build ./mvnw test"
              }
