@@ -10,17 +10,17 @@ pipeline {
           }
           stage("Clean") {
              steps {
-                 sh "clean.sh"
+                 sh script: "./clean.sh"
              }
           }
           stage("Build") {
              steps {
-                 sh "build.sh"
+                 sh script: "./build.sh"
              }
           }
           stage("Test") {
              steps {
-                sh "test.sh"
+                sh script: "./test.sh"
              }
           }
       }
