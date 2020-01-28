@@ -8,9 +8,20 @@ pipeline {
                     git branch: 'develop', url: 'https://github.com/jenkins-salle/master-salle-ci.git'
              }
           }
-          stage("Multi-build Pipeline") {
+          stage("Clean") {
              steps {
-                    sh script: './pipeline.sh'
+                 sh "docker-compose down"
+             }
+          }
+          stage("Build") {
+             steps {
+                 sh "docker-compose build"
+             }
+          }
+          stage("Test") {
+             steps {
+                 sh "docker-compose up -d quarkus-app"
+                 sh "docker-compose run quarkus-build ./mvnw test"
              }
           }
       }
