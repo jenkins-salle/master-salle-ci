@@ -11,7 +11,7 @@ pipeline {
           stage("Clean") {
              steps {
                  sh "docker-compose down"
-                 sh "docker rm -f ${sh "docker ps -qa"}"
+                 sh "docker ps -qa | xargs docker rm -f || true"
              }
           }
           stage("Build") {
