@@ -5,7 +5,7 @@ pipeline {
           stage("Checkout SCM") {
              steps {
                     echo 'Getting the latest sources from remote repository & compile those sources'
-                    git branch: 'develop', url: 'https://github.com/jenkins-salle/master-salle-ci.git'
+                    git branch: "${env.BRANCH_NAME}", url: 'https://github.com/jenkins-salle/master-salle-ci.git'
              }
           }
           stage("Clean") {
