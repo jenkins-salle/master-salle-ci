@@ -11,7 +11,8 @@ services:
     networks:
       - quarkus-network
     volumes:
-    - ./:/app
+      - ./:/app
+#      - ./.mvn/m2_repository:/home/dev/.m2/repository
     working_dir: /app
     env_file:
       - .env
@@ -26,8 +27,8 @@ services:
       - quarkus-network
     env_file:
       - .env
-    ports:
-      - 8080:8080
+#    ports:
+#      - 80:8080
 
 #Docker Networks
 networks:

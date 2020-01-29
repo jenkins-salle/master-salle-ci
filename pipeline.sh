@@ -74,16 +74,10 @@ set -ex
 
 
 #clean
-docker-compose down || true
-docker rm -f "$(docker ps -qa)" || true
-
+./clean.sh
 
 #build
-docker-compose build quarkus-build
-docker-compose run quarkus-build ./mvnw package -DskipTests
-docker-compose build quarkus-app
+./build.sh
 
 #test
-docker-compose up -d quarkus-app
-docker-compose run quarkus-build ./mvnw test
-
+./test.sh
