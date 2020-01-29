@@ -24,4 +24,16 @@ pipeline {
              }
           }
       }
+      post {
+         success {
+            slackSend channel: '#tp-ci',
+                       color: 'good',
+                       message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+         }
+         failure {
+            slackSend channel: '#tp-ci',
+                       color: 'red',
+                       message: "The pipeline ${currentBuild.fullDisplayName} completed with errors."
+         }
+      }
 }
