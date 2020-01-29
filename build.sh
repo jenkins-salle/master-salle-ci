@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 #deshabilitado, en caso que la imagen exista, la ejecuta
 #docker-compose build quarkus-build

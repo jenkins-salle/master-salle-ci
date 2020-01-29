@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 #comentado porque no hace falta levantar la app
 #docker-compose up -d quarkus-app
