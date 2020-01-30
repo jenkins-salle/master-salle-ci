@@ -1,0 +1,38 @@
+## select image
+#FROM maven:4.0-jdk-8
+#
+## copy the project files
+#COPY ./pom.xml /app/pom.xml
+#
+## build all dependencies for offline use
+#RUN mvn dependency:go-offline -B
+#
+## copy your other files
+#COPY ./src /app/src
+#COPY ./mvnw /app/mvnw
+#
+#WORKDIR /app
+## build for release
+#RUN ./mvnw install -DskipTests
+
+# set the startup command to run your binary
+#CMD ["java", "-jar", "./target/my-project.jar"]
+
+
+FROM openjdk:8
+
+COPY . /app
+
+RUN useradd -G sudo -ms /bin/bash dev \
+    && chown -R dev /app \
+    && chmod -R 774 /app
+
+USER dev
+
+WORKDIR /app
+
+RUN ./mvnw install -DskipTests
+
+#COPY ./.mvn/m2/repository /home/dev/.m2/repository/
+#-Dmaven.repo.local=/home/dev/.m2/repository
+#COPY ./.mvn/m2/wrapper /home/dev/.m2/wrapper
