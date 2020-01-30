@@ -23,6 +23,12 @@ pipeline {
                 sh script: "./test.sh"
              }
           }
+          stage("Deploy") {
+             steps {
+                sh script: "./clean.sh"
+                sh script: "./deploy.sh"
+             }
+          }
       }
       post {
          success {
