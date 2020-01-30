@@ -25,6 +25,7 @@ pipeline {
           }
           stage("Deploy") {
              steps {
+                sh script: "./clean.sh"
                 sh script: "./deploy.sh"
              }
           }
