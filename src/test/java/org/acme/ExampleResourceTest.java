@@ -7,7 +7,7 @@ public class ExampleResourceTest {
 
     @Test
     public void testHelloEndpoint() {
-        String expected = "new version";
+        String expected = "hello";
         ExampleResource exampleResource = new ExampleResource();
         Assertions.assertEquals(expected, exampleResource.hello());
     }
