@@ -81,3 +81,6 @@ set -ex
 
 #test
 ./test.sh
+
+#deploy
+./deploy.sh
